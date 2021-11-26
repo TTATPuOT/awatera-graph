@@ -1,5 +1,5 @@
 import Highcharts from 'highcharts';
-import getData, {monthsShort} from "./modules/data";
+import getData, {getName, monthsShort} from "./modules/data";
 
 require('highcharts/modules/exporting')(Highcharts);
 
@@ -14,10 +14,19 @@ async function generate (container, type) {
 
     return Highcharts.chart({
         chart: {
-            renderTo: container
+            renderTo: container,
+            events: {
+                render: function() {
+                    const array = this.series.map(s => s.points[s.points.length - 1])
+                    this.tooltip.refresh(array);
+                }
+            }
         },
         title: {
-            text: 'Динамика портфеля'
+            text: `Динамика портфеля «${getName(type)}»`,
+            style: {
+                textAlign: 'center'
+            }
         },
         credits: false,
         exporting: {
@@ -33,9 +42,9 @@ async function generate (container, type) {
             title: { text: '' },
             labels: {
                 style: {
-                    color: '#07B4B2'
+                    color: '#AFB5BF'
                 },
-                enabled: false
+                format: '{text}%'
             }
         },
 
