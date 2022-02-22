@@ -19,7 +19,7 @@ export const getName = (type) => {
 }
 
 export default async (type) => {
-    const data = await fetch('https://opensheet.vercel.app/1SaKS0oWi7Vep62CK8erQe4-5iHCWudJGlB1sdE5vDP4/list');
+    const data = await fetch('https://opensheet.elk.sh/1SaKS0oWi7Vep62CK8erQe4-5iHCWudJGlB1sdE5vDP4/list');
     const json = await data.json();
     const dates = [];
 
